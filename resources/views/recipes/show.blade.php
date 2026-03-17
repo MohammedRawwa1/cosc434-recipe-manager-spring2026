@@ -13,7 +13,9 @@
   <h5>Instructions</h5>
   <p style="white-space: pre-wrap">{{ $recipe->instructions }}</p>
 
-  <a href="{{ route('recipes.edit', $recipe) }}" class="btn btn-secondary">Edit</a>
+  @if(session('logged_in'))
+    <a href="{{ route('recipes.edit', $recipe) }}" class="btn btn-secondary">Edit</a>
+  @endif
   <a href="{{ route('recipes.index') }}" class="btn btn-link">Back</a>
 
 @endsection

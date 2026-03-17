@@ -21,6 +21,13 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Student Submission
+
+- **Name:** YOUR FULL NAME (replace this)
+- **Course / Lab:** COSC434 - Middleware Lab (Recipe Manager)
+- **What I implemented:** Demo login/logout session routes, `EnsureUserIsLoggedIn` middleware, applied protection to recipe management routes (create/store/edit/update/delete), added demo login/logout links and flash messages, and hid management buttons for guests.
+- **Testing performed:** Single protected route (`/recipes/create`) and a protected group of management routes were exercised locally after changes (please run `composer install` and `php artisan migrate` and then `php artisan serve` to test in your environment).
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.

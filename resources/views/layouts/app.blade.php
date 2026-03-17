@@ -22,7 +22,12 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="{{ route('recipes.index') }}">Recipes</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('recipes.create') }}">Add Recipe</a></li>
+            @if(session('logged_in'))
+              <li class="nav-item"><a class="nav-link" href="{{ route('recipes.create') }}">Add Recipe</a></li>
+              <li class="nav-item"><a class="nav-link" href="/logout-demo">Demo Logout</a></li>
+            @else
+              <li class="nav-item"><a class="nav-link" href="/login-demo">Demo Login</a></li>
+            @endif
           </ul>
         </div>
       </div>
@@ -31,6 +36,10 @@
     <div class="container">
       @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
+      @endif
+
+      @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
       @endif
 
       @yield('content')

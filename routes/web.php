@@ -22,15 +22,18 @@ Route::get('/logout-demo', function (Request $request) {
     return redirect()->route('recipes.index')->with('success', 'Logged out.');
 });
 
-// Public routes: index and show
+// Public route: index
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
 // Protected management routes (create/store/edit/update/destroy)
-Route::middleware(\App\Http\Middleware\EnsureUserIsLoggedIn::class)->group(function () {
+// placed BEFORE the show route so '/recipes/create' is not captured by the {recipe} pattern
+Route::middleware('demo.auth')->group(function () {
     Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::put('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
 });
+
+// Public route: show (kept last so parameter routes don't clash with static paths)
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');

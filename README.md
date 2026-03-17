@@ -57,3 +57,46 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+## Student Submission
+
+- Name: Mohammad Zakaria Al Rawwas (replace this line with your full name)
+- Course / Lab: COSC434 — Middleware Lab (Recipe Manager)
+
+I implemented a simple demo login using the session and a custom middleware to protect recipe management actions. Specifically, I added:
+
+- Demo routes: `/login-demo` (sets a `logged_in` session flag) and `/logout-demo` (clears the flag).
+- Middleware: `EnsureUserIsLoggedIn` — checks `session('logged_in') === true`, redirects to the recipe list with an error flash when access is denied.
+- Route protection: kept `index` and `show` public, placed `create`, `store`, `edit`, `update`, and `destroy` inside a middleware-protected group.
+- UI helpers: Demo Login / Demo Logout links and flash messages in the main layout; Add/Edit/Delete buttons hidden for guests.
+
+Testing performed (confirm locally):
+
+1. While logged out: I verified `/recipes` and `/recipes/{id}` are reachable and that `/recipes/create` is blocked.
+2. After visiting `/login-demo`: I verified `/recipes/create` and other management routes are accessible.
+3. After visiting `/logout-demo`: protected routes are blocked again.
+
+How to run locally
+
+1. Install PHP dependencies: `composer install`
+2. Copy the environment file: `cp .env.example .env` and configure the database in `.env`
+3. Generate app key and run migrations:
+
+```bash
+php artisan key:generate
+php artisan migrate
+```
+
+4. Start the app and the Vite dev server (optional for hot reload):
+
+```bash
+php artisan serve --host=127.0.0.1 --port=8000
+npm install
+npm run dev
+```
+
+Open the app at `http://127.0.0.1:8000` and use `/login-demo` and `/logout-demo` to test protected routes.
+
+Replace the name at the top with your full name before submitting.

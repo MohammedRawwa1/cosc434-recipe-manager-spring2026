@@ -14,8 +14,14 @@ class EnsureUserIsLoggedIn
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->session()->get('logged_in') !== true) {
+            $message = 'Access denied — please use Demo Login.';
+
+            if ($request->expectsJson() || $request->wantsJson()) {
+                return response()->json(['message' => $message], 403);
+            }
+
             return redirect()->route('recipes.index')
-                ->with('error', 'Access denied — please use Demo Login.');
+                ->with('error', $message);
         }
 
         return $next($request);

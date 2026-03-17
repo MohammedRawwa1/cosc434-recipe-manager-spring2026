@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RecipeController;
 
+// Register a short alias for the demo middleware so routes can use 'demo.auth'
+app('router')->aliasMiddleware('demo.auth', \App\Http\Middleware\EnsureUserIsLoggedIn::class);
+
 Route::get('/', function () {
     return view('welcome');
 });
